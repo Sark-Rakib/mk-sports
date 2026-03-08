@@ -35,7 +35,6 @@ const CustomerReviewSwiper = () => {
 
   return (
     <section className="max-w-6xl mx-auto px-5 py-5">
-      <title>MK Sports | Customer Reviews</title>
       <Swiper
         loop={true}
         slidesPerView={1}

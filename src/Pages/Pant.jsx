@@ -43,7 +43,7 @@ const Pant = () => {
 
   return (
     <section className="py-10 ">
-      <title>Lunor | Pant</title>
+      <title>MK Sports | Short Pants</title>
       <div className="w-11/12 mx-auto px-2 md:px-6">
         {/* Title */}
         <div className="text-center mb-12">

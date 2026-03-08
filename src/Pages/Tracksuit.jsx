@@ -43,7 +43,7 @@ const Tracksuit = () => {
 
   return (
     <section className="py-10">
-      <title>Lunor | Panjabi</title>
+      <title>MK Sports | Tracksuits</title>
       <div className="w-11/12 mx-auto px-2 md:px-6">
         {/* Title */}
         <div className="text-center mb-12">

@@ -50,7 +50,7 @@ const AllProducts = () => {
 
   return (
     <div className="w-11/12 mx-auto px-1 py-10 min-h-screen">
-      <title>Lunor | All Products</title>
+      <title>MK Sports | All Products</title>
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
         Available <span className="text-[#aba65e]">Products</span>
       </h1>

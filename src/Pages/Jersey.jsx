@@ -43,7 +43,7 @@ const Jersey = () => {
 
   return (
     <section className="py-10">
-      <title>Lunor | Formal Shirts</title>
+      <title>MK Sports | Jerseys</title>
       <div className="w-11/12 mx-auto px-2 md:px-6">
         {/* Title */}
         <div className="text-center mb-12">

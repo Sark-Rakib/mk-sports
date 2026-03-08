@@ -38,7 +38,7 @@ const HeroSection = () => {
   }, [images]);
 
   return (
-    <section className="relative w-full h-[70vh] overflow-hidden">
+    <section className="relative w-full h-[45vh] md:h-[70vh] overflow-hidden">
       {/* Carousel */}
       <div className="relative w-full h-full">
         {images.map((img, index) => (
