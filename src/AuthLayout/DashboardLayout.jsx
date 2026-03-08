@@ -147,7 +147,7 @@ const DashboardLayout = () => {
                 {/* add products */}
                 <li>
                   <Link
-                    to="/add-tuition"
+                    to="/dashboard/add-tuition"
                     className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
                     data-tip="Add Product"
                   >

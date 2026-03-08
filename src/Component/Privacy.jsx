@@ -3,6 +3,7 @@ import React from "react";
 const Privacy = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 lg:p-12">
+      <title>MK Sports | Privacy Policy</title>
       <h1 className="text-4xl font-bold text-center mb-8 text-[#aba65e]">
         Privacy Policy
       </h1>

@@ -74,6 +74,7 @@ const Register = () => {
   };
   return (
     <div className="space-y-2 text-black">
+      <title>MK Sports | Register</title>
       <h1 className="font-bold text-4xl">Create an Account</h1>
       <p>
         Register with <span className="text-[#aba65e]">MK SPORTS</span>

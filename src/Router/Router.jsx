@@ -80,11 +80,6 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/add-tuition",
-        Component: AddProducts,
-      },
-
-      {
         path: "/terms-service",
         Component: TermService,
       },
@@ -152,6 +147,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/customer-contact",
         Component: CustomerContact,
+      },
+      {
+        path: "/dashboard/add-tuition",
+        Component: AddProducts,
       },
       {
         path: "/dashboard/add-hero-photo",

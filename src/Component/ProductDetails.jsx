@@ -78,7 +78,7 @@ const ProductDetails = () => {
       await axiosSecure.post("/orders", orderData);
       Swal.fire({
         title: "Order Placed!",
-        text: "Your order at LUNOR has been placed successfully 🎉",
+        text: "Your order at MK Sports has been placed successfully 🎉",
         icon: "success",
         confirmButtonText: "Ok",
         confirmButtonColor: "#10B981", // green
@@ -141,7 +141,7 @@ const ProductDetails = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <title>Lunor | Details</title>
+      <title>MK Sports | Details</title>
       <div className="w-11/12 mx-auto py-10">
         {/* Back Button */}
         <Link
@@ -448,8 +448,7 @@ const ProductDetails = () => {
               <textarea
                 type="text"
                 name="description"
-                placeholder="Enter here the size you would like for a product."
-                required
+                placeholder="If you want to take more than one item, please write which size you want for each one here"
                 value={formData.description}
                 onChange={handleInputChange}
                 className="border p-2 rounded outline-none border-gray-500"

@@ -28,6 +28,7 @@ const Login = () => {
 
   return (
     <div className="space-y-2 text-black">
+      <title>MK Sports | Login</title>
       <h1 className="font-bold text-4xl">Welcome Back</h1>
       <p>
         Login with <span className="text-[#aba65e]">MK SPORTS</span>

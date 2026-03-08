@@ -99,7 +99,7 @@ const AddProducts = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 lg:p-10">
-      <title>Lunor | Add Product</title>
+      <title>MK Sports | Add Product</title>
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold">
           Post a <span className="text-[#aba65e]">New Product</span>
