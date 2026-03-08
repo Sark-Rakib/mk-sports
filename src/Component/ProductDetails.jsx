@@ -164,6 +164,7 @@ const ProductDetails = () => {
             <h1 className="font-semibold bg-[#aba65e]  rounded-full w-max px-3">
               {tuition.ability}
             </h1>
+            <p className="text-lg">{tuition.fabric}</p>
             <p className="text-lg">{tuition.description}</p>
 
             {/* Price */}

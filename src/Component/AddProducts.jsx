@@ -10,6 +10,7 @@ const tuitionSchema = {
   name: { required: "Name is required" },
   category: { required: "Please select your product category" },
   price: { required: "Price is required" },
+  fabric: { required: "Fabric is required" },
   // discountPrice: { required: "Discount is required" },
   ability: { required: "Ability is required" },
   size: { required: "Size is required" },
@@ -66,6 +67,7 @@ const AddProducts = () => {
         discountPrice: Number(data.discountPrice),
         description: data.description,
         ability: data.ability,
+        fabric: data.fabric,
         // size: data.size,
         images: [image1, image2, image3, image4],
         status: "Pending",
@@ -220,21 +222,21 @@ const AddProducts = () => {
           </div>
         </div>
 
-        {/* Size */}
-        {/* <div>
+        {/* fabric */}
+        <div>
           <label className="block text-lg font-semibold text-gray-700 mb-2">
-            Product Size <span className="text-red-500">*</span>
+            Product Fabric <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
-            placeholder="e.g. Small, Medium, Large"
-            {...register("size", tuitionSchema.size)}
+            placeholder="e.g. Cotton, Polyester"
+            {...register("fabric", tuitionSchema.fabric)}
             className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:border-gray-600 focus:ring-4 focus:ring-gray-200 outline-none"
           />
-          {errors.size && (
-            <p className="text-red-500 text-sm mt-1">{errors.size.message}</p>
+          {errors.fabric && (
+            <p className="text-red-500 text-sm mt-1">{errors.fabric.message}</p>
           )}
-        </div> */}
+        </div>
 
         {/* Images */}
         {["image1", "image2", "image3", "image4"].map((img, i) => (
