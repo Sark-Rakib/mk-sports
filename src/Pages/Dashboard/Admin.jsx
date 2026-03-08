@@ -69,7 +69,7 @@ const PendingTuitions = () => {
             </thead>
 
             <tbody>
-              {users.map((t, index) => (
+              {users?.map((t, index) => (
                 <tr key={t._id} className="text-black">
                   <td>{index + 1}</td>
                   <td>{t.displayName}</td>

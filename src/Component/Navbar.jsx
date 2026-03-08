@@ -119,7 +119,7 @@ const Navbar = ({ theme, setTheme }) => {
         }
       `}
     >
-      <div className="navbar-start w-11/12 mx-auto flex items-center gap-[40%] sm:gap-[55%]">
+      <div className="navbar-start w-11/12 mx-auto flex items-center gap-[40%] sm:gap-[45%]">
         {/* Mobile Hamburger */}
         <div className="lg:hidden">
           <button
