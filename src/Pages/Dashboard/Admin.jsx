@@ -5,7 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import Loading from "../../Component/Loading";
 
 const PendingTuitions = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -14,6 +14,7 @@ const PendingTuitions = () => {
     isLoading,
   } = useQuery({
     queryKey: ["users", user?.email],
+    enabled: !loading && !!user?.email, // ✅ user load না হওয়া পর্যন্ত query run হবে না
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
@@ -28,7 +29,8 @@ const PendingTuitions = () => {
         refetch();
       }
     } catch (e) {
-      console.log(e, "Failed to make admin");
+      console.log(e);
+      toast.error("Failed to make admin");
     }
   };
 
@@ -40,15 +42,17 @@ const PendingTuitions = () => {
         refetch();
       }
     } catch (e) {
-      console.log(e, "Failed to remove admin");
+      console.log(e);
+      toast.error("Failed to remove admin");
     }
   };
 
-  if (isLoading) return <Loading></Loading>;
+  if (isLoading || loading) return <Loading />;
 
   return (
     <div className="p-8">
       <title>MK Sports | User Management</title>
+
       <h1 className="text-3xl font-bold mb-6">
         User Management (<span className="text-[#aba65e]">{users.length}</span>)
       </h1>
@@ -69,11 +73,12 @@ const PendingTuitions = () => {
             </thead>
 
             <tbody>
-              {users?.map((t, index) => (
+              {users.map((t, index) => (
                 <tr key={t._id} className="text-black">
                   <td>{index + 1}</td>
                   <td>{t.displayName}</td>
                   <td>{t.email}</td>
+
                   <td>
                     <span
                       className={`badge ${
@@ -83,6 +88,7 @@ const PendingTuitions = () => {
                       {t.role || "user"}
                     </span>
                   </td>
+
                   <td className="flex gap-2">
                     {t.role !== "admin" && (
                       <button
@@ -92,6 +98,7 @@ const PendingTuitions = () => {
                         Make Admin
                       </button>
                     )}
+
                     {t.role === "admin" && (
                       <button
                         onClick={() => handleRemoveAdmin(t._id)}
