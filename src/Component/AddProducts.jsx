@@ -10,14 +10,14 @@ const tuitionSchema = {
   name: { required: "Name is required" },
   category: { required: "Please select your product category" },
   price: { required: "Price is required" },
-  fabric: { required: "Fabric is required" },
+  // fabric: { required: "Fabric is required" },
   // discountPrice: { required: "Discount is required" },
   ability: { required: "Ability is required" },
   size: { required: "Size is required" },
   image1: { required: "Image 1 is required" },
   image2: { required: "Image 2 is required" },
-  image3: { required: "Image 3 is required" },
-  image4: { required: "Image 4 is required" },
+  // image3: { required: "Image 3 is required" },
+  // image4: { required: "Image 4 is required" },
   description: { required: "Description is required" },
 };
 
