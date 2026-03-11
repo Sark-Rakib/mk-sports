@@ -2,12 +2,29 @@ import React from "react";
 
 const SkeletonLoader = () => {
   return (
-    <div>
-      <div className="bg-indigo-50 p-6 rounded-xl shadow animate-pulse">
-        <div className="w-24 h-24 rounded-full mx-auto mb-4 bg-gray-300"></div>
-        <div className="h-6 w-32 mx-auto mb-2 bg-gray-300 rounded"></div>
-        <div className="h-4 w-24 mx-auto mb-4 bg-gray-300 rounded"></div>
-        <div className="h-10 w-24 mx-auto bg-gray-300 rounded"></div>
+    <div className="bg-white shadow overflow-hidden">
+      <div className="animate-pulse">
+        {/* Image */}
+        <div className="h-48 w-full bg-gray-200"></div>
+
+        <div className="p-4 space-y-3">
+          {/* Title */}
+          <div className="h-5 w-3/4 bg-gray-200 rounded"></div>
+
+          {/* Price */}
+          <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
+
+          {/* Rating */}
+          <div className="flex gap-2">
+            <div className="h-4 w-4 bg-gray-200 rounded"></div>
+            <div className="h-4 w-4 bg-gray-200 rounded"></div>
+            <div className="h-4 w-4 bg-gray-200 rounded"></div>
+            <div className="h-4 w-4 bg-gray-200 rounded"></div>
+          </div>
+
+          {/* Button */}
+          {/* <div className="h-10 w-full bg-gray-200 rounded-lg"></div> */}
+        </div>
       </div>
     </div>
   );

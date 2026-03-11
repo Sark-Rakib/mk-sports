@@ -49,8 +49,13 @@ const Products = () => {
 
         {/* Loading */}
         {loading && (
-          <p className="text-center text-gray-500">
-            <SkeletonLoader></SkeletonLoader>
+          <p className="w-11/12 mx-auto text-center py-20 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {Array(8)
+              .fill(0)
+              .map((_, i) => (
+                <SkeletonLoader key={i} />
+              ))}
+            {/* <SkeletonLoader></SkeletonLoader> */}
           </p>
         )}
 
