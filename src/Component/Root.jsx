@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Marco from "./Marco";
+import NeedHelpFloating from "./NeedHelpFloating";
 
 const Root = () => {
   const [theme, setTheme] = useState(
@@ -19,6 +20,8 @@ const Root = () => {
       <Marco></Marco>
       <Navbar theme={theme} setTheme={setTheme} />
       <Outlet />
+      {/* <!-- Floating Chat Buttons with Tailwind CSS --> */}
+      <NeedHelpFloating></NeedHelpFloating>
       <Footer />
     </>
   );
