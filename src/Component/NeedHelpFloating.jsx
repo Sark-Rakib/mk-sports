@@ -11,14 +11,14 @@ const NeedHelpFloating = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 md:bottom-10 md:right-10">
       {/* Speech bubble - "Need Help?" */}
-      <div className="relative">
+      <div className="relative left-1 md:-left-1">
         <div className="bg-black text-white text-sm md:text-sm font-bold px-4 py-2 rounded-full shadow-xl whitespace-nowrap">
           Need Help?
         </div>
 
         {/* pointer */}
         <div
-          className="animate-bounce absolute -bottom-3 left-12 md:left-11 w-0 h-0 
+          className="animate-bounce absolute -bottom-3 left-11 md:left-11 w-0 h-0 
           border-l-[10px] border-l-transparent 
           border-t-[10px] border-t-black 
           border-r-[10px] border-r-transparent"
