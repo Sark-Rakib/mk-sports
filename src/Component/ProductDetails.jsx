@@ -383,7 +383,7 @@ const ProductDetails = () => {
 
       {/* Order Form Modal */}
       {showOrderForm && (
-        <div className="fixed p-4 inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="fixed p-4 inset-0 z-510 flex items-center justify-center bg-black/40">
           <div className="bg-gray-200 p-6 rounded-xl max-w-md w-full relative max-h-[90vh] overflow-y-auto">
             <h2 className="text-2xl text-black font-bold mb-4 text-center">
               Place Your <span className="text-[#aba65e]">Order</span>
