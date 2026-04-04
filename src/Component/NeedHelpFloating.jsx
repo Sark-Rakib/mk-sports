@@ -5,8 +5,7 @@ import { SiMessenger } from "react-icons/si";
 const NeedHelpFloating = () => {
   const whatsappLink =
     "https://wa.me/8801792229936?text=Hello%2C%20I%20need%20help";
-  const messengerLink =
-    "https://www.facebook.com/messages/e2ee/t/6826641087436540";
+  const messengerLink = "https://www.facebook.com/md.khirul.1447";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 md:bottom-10 md:right-10">

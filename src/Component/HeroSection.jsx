@@ -38,39 +38,41 @@ const HeroSection = () => {
   }, [images]);
 
   return (
-    <section className="relative w-full h-[45vh] md:h-[70vh] overflow-hidden">
-      {/* Carousel */}
-      <div className="relative w-full h-full">
-        {images.map((img, index) => (
-          <motion.img
-            key={index}
-            src={img}
-            alt="Hero"
-            className="absolute inset-0 w-full h-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: current === index ? 1 : 0 }}
-            transition={{ duration: 1 }}
-          />
-        ))}
-      </div>
+    <Link to="/all-products">
+      <section className="relative w-full h-[45vh] md:h-[70vh] overflow-hidden">
+        {/* Carousel */}
+        <div className="relative w-full h-full">
+          {images.map((img, index) => (
+            <motion.img
+              key={index}
+              src={img}
+              alt="Hero"
+              className="absolute inset-0 w-full h-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: current === index ? 1 : 0 }}
+              transition={{ duration: 1 }}
+            />
+          ))}
+        </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40"></div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Text + Button */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end text-white text-center px-6">
-        {/* <h1 className="text-4xl md:text-5xl font-bold">
+        {/* Text + Button */}
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-white text-center px-6">
+          {/* <h1 className="text-4xl md:text-5xl font-bold">
           EID COLLECTION / 2026 <br />
           <span className="text-gray-900">LUNOR</span>
         </h1> */}
 
-        <Link to="/all-products">
+          {/* <Link to="/all-products">
           <button className="mt-8 mb-4 px-8 py-3 bg-[#aba65e] hover:bg-[darkkhaki] rounded text-white font-semibold shadow-xl">
             Explore Now
           </button>
-        </Link>
-      </div>
-    </section>
+        </Link> */}
+        </div>
+      </section>
+    </Link>
   );
 };
 

@@ -190,7 +190,7 @@ const Navbar = ({ theme, setTheme }) => {
 
         {/* <img className="h-12 ml-3" alt="E-Tuition BD Logo" src={Logo} /> */}
 
-        <img src={navLogo} alt="" className="h-15" />
+        <img src={navLogo} alt="" className="h-15 -ml-1" />
       </div>
 
       {/* Desktop Menu  */}
