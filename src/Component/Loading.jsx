@@ -1,48 +1,35 @@
-// src/components/FancyLoader.jsx
 import React from "react";
 
 const Loading = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-      <div className="relative flex flex-col items-center gap-6">
-        {/* Rotating rings */}
-        <div className="relative w-24 h-24">
-          <span className="absolute w-full h-full rounded-full border-2 border-gray-700 border-t-amber-400 animate-spin-slow"></span>
-          <span className="absolute w-16 h-16 rounded-full border-2 border-gray-700 border-b-yellow-400 animate-spin-slow-reverse"></span>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
+      {/* Subtle black glow */}
+      <div className="absolute w-[250px] h-[250px] bg-black/10 rounded-full blur-3xl animate-pulse"></div>
 
-        {/* Brand Text */}
-        <h1 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text animate-brand-glow">
-          MK <br /> <span className="text-sm">SPORTS</span>
+      <div className="absolute w-[180px] h-[180px] bg-black/5 rounded-full blur-2xl animate-pulse"></div>
+
+      {/* Loader content */}
+      <div className="flex flex-col items-center gap-6 z-10">
+        {/* Minimal spinner */}
+        <div className="w-14 h-14 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+
+        {/* Brand */}
+        <h1 className="text-black text-3xl md:text-4xl font-extrabold tracking-widest">
+          MK <span className="text-gray-500">SPORTS</span>
         </h1>
+
+        {/* Sub text */}
+        <p className="text-gray-500 text-sm tracking-wide">
+          Loading your experience...
+        </p>
+
+        {/* Dot loader */}
+        <div className="flex gap-2 mt-2">
+          <span className="w-2 h-2 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+          <span className="w-2 h-2 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+          <span className="w-2 h-2 bg-black rounded-full animate-bounce"></span>
+        </div>
       </div>
-
-      <style>
-        {`
-          @keyframes spin-slow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-          @keyframes spin-slow-reverse {
-            0% { transform: rotate(360deg); }
-            100% { transform: rotate(0deg); }
-          }
-          .animate-spin-slow { animation: spin-slow 3s linear infinite; }
-          .animate-spin-slow-reverse { animation: spin-slow-reverse 2.5s linear infinite; }
-
-          @keyframes brandGlow {
-            0%, 100% { opacity: 0.3; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.05); }
-          }
-          .animate-brand-glow {
-            background-image: linear-gradient(90deg, #f59e0b, #fcd34d, #fbbf24);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: brandGlow 2s ease-in-out infinite alternate;
-          }
-        `}
-      </style>
     </div>
   );
 };
