@@ -54,7 +54,7 @@ const PendingTuitions = () => {
       <title>MK Sports | User Management</title>
 
       <h1 className="text-3xl font-bold mb-6">
-        User Management (<span className="text-[#aba65e]">{users.length}</span>)
+        User Management (<span className="text-[#C8102E]">{users.length}</span>)
       </h1>
 
       {users.length === 0 ? (

@@ -16,7 +16,7 @@ const About = () => {
           className="flex flex-col gap-6"
         >
           {/* Section Title */}
-          <h2 className="text-4xl font-bold text-[#aba65e]">
+          <h2 className="text-4xl font-bold text-[#C8102E]">
             About <span className="text-[#dacf2b]">MK Sports</span>
           </h2>
 
@@ -44,7 +44,7 @@ const About = () => {
 
           {/* Mission */}
           <div className=" mt-4">
-            <h3 className="text-xl font-semibold text-[#aba65e] mb-2">
+            <h3 className="text-xl font-semibold text-[#C8102E] mb-2">
               Our Mission
             </h3>
             <p>

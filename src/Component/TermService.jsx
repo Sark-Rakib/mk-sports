@@ -5,7 +5,7 @@ const TermService = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 lg:p-12">
       <title>MK Sports | Terms of Service</title>
-      <h1 className="text-4xl font-bold text-center mb-8 text-[#aba65e]">
+      <h1 className="text-4xl font-bold text-center mb-8 text-[#C8102E]">
         Terms of Service
       </h1>
 

@@ -34,7 +34,7 @@ const CustomerReviewSwiper = () => {
     return <p className="text-center py-20">No reviews found 😢</p>;
 
   return (
-    <section className="max-w-6xl mx-auto px-5 py-5">
+    <section className="max-w-7xl mx-auto px-5 py-5">
       <Swiper
         loop={true}
         slidesPerView={1}

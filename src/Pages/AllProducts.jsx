@@ -1,4 +1,3 @@
-// src/pages/Tuitions.jsx
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxios";
@@ -9,10 +8,9 @@ const ITEMS_PER_PAGE = 16;
 
 const AllProducts = () => {
   const axiosSecure = useAxiosSecure();
-
   const [currentPage, setCurrentPage] = useState(1);
   const [searchCategory, setSearchCategory] = useState("");
-  const [sortBy, setSortBy] = useState("date"); // date, budget-high, budget-low
+  const [sortBy, setSortBy] = useState("date");
 
   const {
     data: response = {},
@@ -38,7 +36,6 @@ const AllProducts = () => {
   const tuitions = response?.tuitions || [];
   const totalTuitions = response.totalTuitions || 0;
   const totalPages = response.totalPages || 1;
-
   const loading = isLoading || isFetching;
 
   const handlePageChange = (page) => {
@@ -49,27 +46,36 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto px-1 py-10 min-h-screen">
+    <div className="py-14 px-7">
       <title>MK Sports | All Products</title>
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
-        Available <span className="text-[#aba65e]">Products</span>
-      </h1>
 
-      {/* Search & Sort Controls – same style as Tutors page */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-10 max-w-4xl mx-auto">
+      {/* Header */}
+      <div className="mb-12">
+        <p className="text-[#C8102E] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">
+          Collection
+        </p>
+        <h1
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          All Products
+        </h1>
+      </div>
+
+      {/* Search & Sort */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-12 pb-8 border-b border-gray-100">
         <input
           type="text"
-          placeholder="Search by Category (jersey, short pant, track suit...)"
-          className="input input-bordered border-black outline-none flex-1 p-3 w-full"
+          placeholder="Search by category..."
+          className="flex-1 px-5 py-3 bg-gray-50 border border-gray-100 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-gray-300 transition-colors"
           value={searchCategory}
           onChange={(e) => {
             setSearchCategory(e.target.value);
             setCurrentPage(1);
           }}
         />
-
         <select
-          className="select select-bordered border-black outline-none w-full sm:w-48"
+          className="px-5 py-3 bg-gray-50 border border-gray-100 text-sm text-gray-700 focus:outline-none focus:border-gray-300 transition-colors w-full sm:w-52"
           value={sortBy}
           onChange={(e) => {
             setSortBy(e.target.value);
@@ -77,14 +83,14 @@ const AllProducts = () => {
           }}
         >
           <option value="date">Newest First</option>
-          <option value="budget-high">Budget: High to Low</option>
-          <option value="budget-low">Budget: Low to High</option>
+          <option value="budget-high">Price: High to Low</option>
+          <option value="budget-low">Price: Low to High</option>
         </select>
       </div>
 
       {/* Results */}
       {loading ? (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {Array(8)
             .fill(0)
             .map((_, i) => (
@@ -92,31 +98,32 @@ const AllProducts = () => {
             ))}
         </div>
       ) : tuitions.length === 0 ? (
-        <div className="text-center py-20">
-          <h3 className="text-2xl font-semibold text-gray-600">
-            No products found matching your search
+        <div className="text-center py-32">
+          <div className="text-6xl mb-4 opacity-30"></div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            No products found
           </h3>
-          <p className="mt-3 text-gray-500">
-            Try different category keywords or clear the search
+          <p className="text-sm text-gray-400">
+            Try different keywords or clear the search
           </p>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
             {tuitions.map((tuition) => (
               <ProductCard key={tuition._id} tuition={tuition} />
             ))}
           </div>
 
-          {/* Pagination – same style as Tutors page */}
+          {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex flex-wrap justify-center items-center gap-2 mt-12">
+            <div className="flex flex-wrap justify-center items-center gap-1.5 pt-8 border-t border-gray-100">
               <button
-                className="btn btn-sm btn-outline"
+                className="px-5 py-2.5 text-[11px] font-semibold tracking-[0.05em] uppercase border border-gray-200 hover:border-black hover:text-black text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                 disabled={currentPage === 1}
                 onClick={() => handlePageChange(currentPage - 1)}
               >
-                « Previous
+                Prev
               </button>
 
               {Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -127,8 +134,10 @@ const AllProducts = () => {
                 .map((page) => (
                   <button
                     key={page}
-                    className={`btn btn-sm ${
-                      currentPage === page ? "btn bg-[#aba65e]" : "btn-outline"
+                    className={`w-10 h-10 text-[12px] font-semibold transition-all ${
+                      currentPage === page
+                        ? "bg-black text-white"
+                        : "border border-gray-200 text-gray-500 hover:border-black hover:text-black"
                     }`}
                     onClick={() => handlePageChange(page)}
                   >
@@ -137,18 +146,17 @@ const AllProducts = () => {
                 ))}
 
               <button
-                className="btn btn-sm btn-outline"
+                className="px-5 py-2.5 text-[11px] font-semibold tracking-[0.05em] uppercase border border-gray-200 hover:border-black hover:text-black text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                 disabled={currentPage === totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
               >
-                Next »
+                Next
               </button>
             </div>
           )}
 
-          {/* Showing info */}
-          <div className="text-center mt-6">
-            Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1}–
+          <div className="text-center mt-8 text-[11px] text-gray-400 tracking-wider uppercase">
+            Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} -{" "}
             {Math.min(currentPage * ITEMS_PER_PAGE, totalTuitions)} of{" "}
             {totalTuitions} products
           </div>

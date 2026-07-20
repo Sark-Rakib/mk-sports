@@ -4,8 +4,6 @@ import useAxiosSecure from "../Hooks/useAxios";
 import Loading from "./Loading";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import CustomerReview from "./CustomerReview";
-import Swal from "sweetalert2";
-import useAuth from "../Hooks/useAuth";
 import ImageCarousel from "./ImageCarousel";
 import UseRole from "../Hooks/useRole";
 
@@ -16,20 +14,9 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("");
+  const [sizeError, setSizeError] = useState(false);
   const navigate = useNavigate();
-  const { user } = useAuth();
   const { role } = UseRole();
-
-  // Order form modal state
-  const [showOrderForm, setShowOrderForm] = useState(false);
-
-  // Form state
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    district: "",
-    street: "",
-  });
 
   useEffect(() => {
     const fetchTuition = async () => {
@@ -47,7 +34,11 @@ const ProductDetails = () => {
 
   if (loading) return <Loading />;
   if (!tuition)
-    return <div className="text-center py-10 text-xl">Product not found</div>;
+    return (
+      <div className="text-center py-20 text-xl text-gray-400">
+        Product not found
+      </div>
+    );
 
   const price = tuition.discountPrice || tuition.price;
   const totalPrice = quantity * price;
@@ -57,70 +48,22 @@ const ProductDetails = () => {
     if (type === "decrement" && quantity > 1) setQuantity((prev) => prev - 1);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleOrderSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const orderData = {
-        productId: tuition._id,
-        productName: tuition.name,
-        productImage: tuition.images[0],
-        quantity,
-        totalPrice,
-        size: size || "Not specified",
-        email: user?.email || formData.email,
-        ...formData,
-      };
-      await axiosSecure.post("/orders", orderData);
-      Swal.fire({
-        title: "Order Placed!",
-        text: "Your order at MK Sports has been placed successfully 🎉",
-        icon: "success",
-        confirmButtonText: "Ok",
-        confirmButtonColor: "#10B981", // green
-        timer: 3000,
-        toast: true,
-        position: "center",
-        showConfirmButton: false,
-      });
-      navigate("/dashboard/my-orders");
-      setShowOrderForm(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        district: "",
-        street: "",
-        description: "",
-      });
-    } catch (err) {
-      console.error(err);
-      alert("Failed to place order. Try again.");
-    }
-  };
-
   const sizes = [
-    { size: "S", chest: "36-", length: "26", shoulder: "16" },
-    { size: "M", chest: "38", length: "27", shoulder: "17" },
-    { size: "L", chest: "40", length: "28", shoulder: "18" },
-    { size: "XL", chest: "42", length: "29", shoulder: "19" },
-    { size: "XXL", chest: "44", length: "30", shoulder: "20" },
-    { size: "3XL", chest: "46", length: "31", shoulder: "20" },
-    { size: "4XL", chest: "48", length: "32", shoulder: "20" },
+    { size: "S", chest: "36-", length: "26" },
+    { size: "M", chest: "38", length: "27" },
+    { size: "L", chest: "40", length: "28" },
+    { size: "XL", chest: "42", length: "29" },
+    { size: "XXL", chest: "44", length: "30" },
+    { size: "3XL", chest: "46", length: "31" },
+    { size: "4XL", chest: "48", length: "32" },
   ];
   const short = [
-    { size: "M", chest: "38-40", length: "19", shoulder: "17" },
-    { size: "L", chest: "40-42", length: "20", shoulder: "18" },
-    { size: "XL", chest: "42-44", length: "21", shoulder: "19" },
-    { size: "XXL", chest: "44-46", length: "22", shoulder: "20" },
+    { size: "M", chest: "38-40", length: "19" },
+    { size: "L", chest: "40-42", length: "20" },
+    { size: "XL", chest: "42-44", length: "21" },
+    { size: "XXL", chest: "44-46", length: "22" },
   ];
-
   const forKids = [
-    // { size: "S", chest: "36-38", length: "26", shoulder: "16" },
     { size: "16", chest: "22", length: "18", year: "3-4" },
     { size: "18", chest: "24", length: "19", year: "5-6" },
     { size: "20", chest: "26", length: "20", year: "7-8" },
@@ -131,8 +74,7 @@ const ProductDetails = () => {
   ];
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", {
+    return new Date(dateString).toLocaleDateString("en-GB", {
       day: "numeric",
       month: "short",
       year: "numeric",
@@ -140,79 +82,91 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen">
       <title>MK Sports | Details</title>
-      <div className="w-11/12 mx-auto py-10">
-        {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-8">
+        {/* Back */}
         <Link
           to="/all-products"
-          className="flex w-40 items-center gap-2 mb-6 text-[#aba65e] hover:text-gray-200 font-medium transition-all"
+          className="inline-flex items-center gap-2 mb-8 text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 hover:text-black transition-colors group"
         >
-          <IoMdArrowRoundBack className="text-2xl" />
+          <IoMdArrowRoundBack className="text-base group-hover:-translate-x-1 transition-transform" />
           Back to Products
         </Link>
 
-        <div className="flex flex-col lg:flex-row gap-10">
-          {/* Product Image */}
-          <div className="w-full lg:w-1/2 p-2 mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+          {/* Image */}
+          <div className="overflow-hidden">
             <ImageCarousel images={tuition.images} />
           </div>
 
-          {/* Product Info */}
-          <div className="flex-1 flex flex-col gap-4">
-            <h1 className="text-3xl md:text-4xl font-bold">{tuition.name}</h1>
-            <h1 className="font-semibold bg-[#aba65e]  rounded-full w-max px-3">
+          {/* Info */}
+          <div className="flex flex-col">
+            <p className="text-[#C8102E] text-[11px] font-semibold tracking-[0.2em] uppercase mb-3">
               {tuition.ability}
+            </p>
+            <h1
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {tuition.name}
             </h1>
-            <p className="text-lg">{tuition.fabric}</p>
-            <p className="text-lg">{tuition.description}</p>
+            <p className="text-sm text-gray-500 mb-1">{tuition.fabric}</p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">
+              {tuition.description}
+            </p>
 
             {/* Price */}
-            <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-gray-100">
               {tuition.discountPrice ? (
                 <>
-                  <span className="text-red-400 line-through font-medium text-lg">
-                    ৳{tuition.price}
+                  <span className="text-gray-400 line-through text-lg">
+                    {tuition.price} BDT
                   </span>
-                  <span className=" font-bold text-2xl">
-                    ৳{tuition.discountPrice}
+                  <span className="text-3xl font-bold text-gray-900">
+                    {tuition.discountPrice} BDT
                   </span>
                 </>
               ) : (
-                <span className="font-bold text-2xl">৳{tuition.price}</span>
+                <span className="text-3xl font-bold text-gray-900">
+                  {tuition.price} BDT
+                </span>
               )}
             </div>
 
             {/* Quantity */}
-            <div className="flex items-center gap-4 mt-4">
-              <span className="font-medium">Quantity :</span>
-              <div className="flex items-center  overflow-hidden">
+            <div className="mb-6">
+              <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mb-3 block">
+                Quantity
+              </label>
+              <div className="inline-flex items-center border border-gray-200">
                 <button
                   onClick={() => handleQuantityChange("decrement")}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                  className="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-50 transition-colors"
                 >
                   -
                 </button>
-                <span className="px-6 py-2 bg-white text-gray-900 font-semibold">
+                <span className="w-12 h-10 flex items-center justify-center text-sm font-semibold border-x border-gray-200">
                   {quantity}
                 </span>
                 <button
                   onClick={() => handleQuantityChange("increment")}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                  className="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-50 transition-colors"
                 >
                   +
                 </button>
               </div>
             </div>
 
-            {/* products size */}
-            <div className="mt-2">
-              <span className="font-medium mr-2">Size :</span>
-
+            {/* Size */}
+            <div className="mb-6">
+              <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mb-3 block">
+                Size
+              </label>
               <select
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
-                className="border px-3 py-1 rounded"
+                className="w-full sm:w-64 px-4 py-3 border border-gray-200 text-sm bg-white focus:outline-none focus:border-black transition-colors"
               >
                 <option value="">Select Size</option>
                 <option value="S">S</option>
@@ -220,9 +174,9 @@ const ProductDetails = () => {
                 <option value="L">L</option>
                 <option value="XL">XL</option>
                 <option value="XXL">XXL</option>
-                <option value="XXL">3XL</option>
-                <option value="XXL">4XL</option>
-                <option>For Kids</option>
+                <option value="3XL">3XL</option>
+                <option value="4XL">4XL</option>
+                <option disabled>For Kids</option>
                 <option value="16">16</option>
                 <option value="18">18</option>
                 <option value="20">20</option>
@@ -231,253 +185,132 @@ const ProductDetails = () => {
                 <option value="26">26</option>
                 <option value="28">28</option>
               </select>
-
-              {size && (
-                <p className="mt-2 text-sm text-gray-600">
-                  Selected Size: {size}
-                </p>
+              {sizeError && (
+                <p className="text-[#C8102E] text-xs mt-2">Please select a size</p>
               )}
             </div>
 
-            {/* size for kids */}
-
-            {/* Total Price */}
-            <div className="flex justify-between items-center">
-              <div className="mt-2 text-lg ">
-                <span className="font-medium">Total Price: </span>
-                <span className="font-bold text-xl">৳{totalPrice}</span>
-              </div>
-
-              {role === "admin" && (
-                <Link
-                  to={`/dashboard/tuition/${id}/edit`}
-                  className="bg-[#aba65e] text-white px-4 py-2 rounded hover:bg-[#8a854d] transition-colors"
-                >
-                  Edit Product
-                </Link>
-              )}
+            {/* Total */}
+            <div className="mb-6 pb-6 border-b border-gray-100 flex items-center">
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mr-3">
+                Total
+              </span>
+              <span className="text-2xl font-bold text-gray-900">
+                {totalPrice} BDT
+              </span>
             </div>
 
-            {/* Order Now Button */}
-            <div className="mt-6">
+            {/* Admin Edit */}
+            {role === "admin" && (
+              <Link
+                to={`/dashboard/tuition/${id}/edit`}
+                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#C8102E] hover:text-red-800 mb-4 inline-block"
+              >
+                Edit Product
+              </Link>
+            )}
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
-                onClick={() => setShowOrderForm(true)}
-                className="w-full md:w-1/2 py-4 px-6 bg-[#aba65e] text-white text-lg font-bold rounded-xl shadow-lg hover:bg-[#8a854d] hover:shadow-2xl transition-all"
+                onClick={() => {
+                  if (!size) {
+                    setSizeError(true);
+                    return;
+                  }
+                  setSizeError(false);
+                  navigate(`/order/${id}`, {
+                    state: { product: tuition, quantity, size },
+                  });
+                }}
+                className="flex-1 py-4 px-8 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#C8102E] transition-colors duration-300"
               >
                 Order Now
               </button>
-            </div>
-            {/* WhatsApps Order Button */}
-            <div className="mt-6">
               <a
-                href={`https://wa.me/8801792229936?text=${encodeURIComponent(
-                  `Hello! I want to order:\nProduct: ${tuition.name}\nQuantity: ${quantity}\nSize: ${size}\nTotal: ৳${totalPrice}`,
-                )}`}
+                href={`https://wa.me/8801792229936?text=${encodeURIComponent(`Hello! I want to order:\nProduct: ${tuition.name}\nQuantity: ${quantity}\nSize: ${size}\nTotal: \u09F3${totalPrice}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full md:w-1/2 block py-4 px-6 bg-green-600 text-white text-lg font-bold rounded-xl shadow-lg hover:bg-green-700 hover:shadow-2xl transition-all text-center"
+                className="flex-1 py-4 px-8 border border-gray-200 text-gray-700 text-[11px] font-semibold tracking-[0.15em] uppercase text-center hover:border-black hover:text-black transition-colors duration-300"
               >
                 WhatsApp
               </a>
             </div>
 
-            <div className="p-2 text-right text-xs text-gray-400">
+            <p className="text-[10px] text-gray-400 mt-4 tracking-wider uppercase">
               Posted: {formatDate(tuition.postedAt)}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Size Charts */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 mt-16 mb-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            title: "For Mens",
+            data: sizes,
+            cols: ["Size", "Chest (inch)", "Length (inch)"],
+            rows: (s) => [s.size, s.chest, s.length],
+          },
+          {
+            title: "For Kids",
+            data: forKids,
+            cols: ["Size", "Chest (inch)", "Length (inch)", "Years"],
+            rows: (s) => [s.size, s.chest, s.length, s.year],
+          },
+          {
+            title: "Short Pant",
+            data: short,
+            cols: ["Size", "Length (inch)"],
+            rows: (s) => [s.size, s.length],
+          },
+        ].map((table) => (
+          <div key={table.title}>
+            <h3
+              className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-900 mb-4"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {table.title}
+            </h3>
+            <div className="overflow-x-auto border border-gray-100">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-900 text-white">
+                    {table.cols.map((c) => (
+                      <th
+                        key={c}
+                        className="px-4 py-2.5 text-left text-[11px] font-semibold tracking-[0.05em] uppercase"
+                      >
+                        {c}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {table.data.map((item, idx) => (
+                    <tr
+                      key={item.size}
+                      className={`border-t border-gray-100 ${idx % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                    >
+                      {table.rows(item).map((val, i) => (
+                        <td
+                          key={i}
+                          className="px-4 py-2.5 text-gray-600 text-xs"
+                        >
+                          {val}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
+        ))}
       </div>
 
-      {/* size chart */}
-      <div className="w-11/13 mx-auto flex-col md:flex md:flex-row justify-between gap-10 mb-10">
-        <div className="mt-2">
-          <h2 className="text-xl font-semibold mb-3">For Mens</h2>
-
-          <div className="overflow-x-auto">
-            <table className="table-auto w-full border border-gray-200">
-              <thead className="bg-[#aba65e]">
-                <tr>
-                  <th className="border px-4 py-2">Size</th>
-                  <th className="border px-4 py-2">Chest (inch)</th>
-                  <th className="border px-4 py-2">Length (inch)</th>
-                  {/* <th className="border px-4 py-2">Shoulder (inch)</th> */}
-                </tr>
-              </thead>
-
-              <tbody>
-                {sizes.map((item) => (
-                  <tr key={item.size} className="text-center">
-                    <td className="border px-4 py-2 font-medium">
-                      {item.size}
-                    </td>
-                    <td className="border px-4 py-2">{item.chest}</td>
-                    <td className="border px-4 py-2">{item.length}</td>
-                    {/* <td className="border px-4 py-2">{item.shoulder}</td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="mt-2">
-          <h2 className="text-xl font-semibold mb-3">For Kids</h2>
-
-          <div className="overflow-x-auto">
-            <table className="table-auto w-full border border-gray-200">
-              <thead className="bg-[#aba65e]">
-                <tr>
-                  <th className="border px-4 py-2">Size</th>
-                  <th className="border px-4 py-2">Chest (inch)</th>
-                  <th className="border px-4 py-2">Length (inch)</th>
-                  <th className="border px-4 py-2">Years</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {forKids.map((item) => (
-                  <tr key={item.size} className="text-center">
-                    <td className="border px-4 py-2 font-medium">
-                      {item.size}
-                    </td>
-                    <td className="border px-4 py-2">{item.chest}</td>
-                    <td className="border px-4 py-2">{item.length}</td>
-                    <td className="border px-4 py-2">{item.year}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="mt-2">
-          <h2 className="text-xl font-semibold mb-3">Short Pant</h2>
-
-          <div className="overflow-x-auto">
-            <table className="table-auto w-full border border-gray-200">
-              <thead className="bg-[#aba65e]">
-                <tr>
-                  <th className="border px-4 py-2">Size</th>
-                  {/* <th className="border px-4 py-2">Chest (inch)</th> */}
-                  <th className="border px-4 py-2">Length (inch)</th>
-                  {/* <th className="border px-4 py-2">Shoulder (inch)</th> */}
-                </tr>
-              </thead>
-
-              <tbody>
-                {short.map((item) => (
-                  <tr key={item.size} className="text-center">
-                    <td className="border px-4 py-2 font-medium">
-                      {item.size}
-                    </td>
-                    {/* <td className="border px-4 py-2">{item.chest}</td> */}
-                    <td className="border px-4 py-2">{item.length}</td>
-                    {/* <td className="border px-4 py-2">{item.shoulder}</td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      {/* Order Form Modal */}
-      {showOrderForm && (
-        <div className="fixed p-4 inset-0 z-510 flex items-center justify-center bg-black/40">
-          <div className="bg-gray-200 p-6 rounded-xl max-w-md w-full relative max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl text-black font-bold mb-4 text-center">
-              Place Your <span className="text-[#aba65e]">Order</span>
-            </h2>
-            <form
-              onSubmit={handleOrderSubmit}
-              className="flex flex-col gap-3 text-black"
-            >
-              <label>Your Name</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                required
-                value={formData.name}
-                onChange={handleInputChange}
-                className="border p-2 rounded outline-none border-gray-500"
-              />
-              <label>Your Email (auto-filled)</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                required={!user} // logged-in না হলে required
-                value={user ? user.email : formData.email}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
-                }
-                className={`border p-2 rounded outline-none border-gray-500 ${user ? "bg-gray-200" : ""}`}
-                disabled={!!user} // logged-in হলে disabled
-              />
-              <label>Your Phone Number</label>
-              <input
-                type="number"
-                name="phone"
-                placeholder="Phone Number"
-                required
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="border p-2 rounded outline-none border-gray-500"
-              />
-              <label>Your District</label>
-              <input
-                type="text"
-                name="district"
-                placeholder="District"
-                required
-                value={formData.district}
-                onChange={handleInputChange}
-                className="border p-2 rounded outline-none border-gray-500"
-              />
-              <label>Your Street Address</label>
-              <input
-                type="text"
-                name="street"
-                placeholder="Street Address"
-                required
-                value={formData.street}
-                onChange={handleInputChange}
-                className="border p-2 rounded outline-none border-gray-500"
-              />
-              <label>Description</label>
-              <textarea
-                type="text"
-                name="description"
-                placeholder="If you want to take more than one item, please write which size you want for each one here"
-                value={formData.description}
-                onChange={handleInputChange}
-                className="border p-2 rounded outline-none border-gray-500"
-              />
-              <p className="text-center text-red-500 text-sm">
-                Note : Delivery charge depend on quantity and location.
-              </p>
-              <div className="flex justify-between mt-4">
-                <button
-                  type="button"
-                  onClick={() => setShowOrderForm(false)}
-                  className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-300 transition"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
-                >
-                  Confirm
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      <hr className="text-[#aba65e]" />
+      <div className="max-w-7xl mx-auto border-t border-gray-100" />
       <CustomerReview />
     </div>
   );

@@ -61,7 +61,7 @@ const MyOrders = () => {
     <div className="p-6">
       <title>MK Sports | My Order</title>
       <h1 className="text-2xl font-bold  text-center mb-6">
-        My Orders (<span className="text-[#aba65e]">{orders.length}</span>)
+        My Orders (<span className="text-[#C8102E]">{orders.length}</span>)
       </h1>
 
       {orders.length === 0 ? (

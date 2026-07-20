@@ -73,7 +73,7 @@ const CasualShirt = () => {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
 
-                  <span className="absolute top-3 right-3 bg-[#aba65e] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  <span className="absolute top-3 right-3 bg-[#C8102E] text-white text-xs font-semibold px-3 py-1 rounded-full">
                     {item.ability}
                   </span>
                 </div>

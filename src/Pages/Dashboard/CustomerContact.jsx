@@ -26,7 +26,7 @@ const CustomerContact = () => {
     <div>
       <h1 className="text-2xl md:text 3xl text-center font-bold mt-5">
         Customer Message (
-        <span className="text-[#aba65e]">{contact.length}</span>)
+        <span className="text-[#C8102E]">{contact.length}</span>)
       </h1>
       <title>MK Sports | Customer Contact</title>
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

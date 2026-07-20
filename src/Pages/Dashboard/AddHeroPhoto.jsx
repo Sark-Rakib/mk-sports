@@ -99,7 +99,7 @@ const AddHeroPhoto = () => {
       <title>MK Sports | Add Hero</title>
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold">
-          Hero <span className="text-[#aba65e]">Photos</span>
+          Hero <span className="text-[#C8102E]">Photos</span>
         </h1>
       </div>
 
@@ -116,7 +116,7 @@ const AddHeroPhoto = () => {
             type="file"
             accept="image/*"
             {...register("image", { required: "Image is required" })}
-            className="w-full px-5 py-4 rounded-xl border border-gray-300 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#aba65e] file:text-white hover:file:bg-[#8a854d] focus:border-gray-600 focus:ring-4 focus:ring-gray-200 outline-none"
+            className="w-full px-5 py-4 rounded-xl border border-gray-300 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#C8102E] file:text-white hover:file:bg-[#A30D25] focus:border-gray-600 focus:ring-4 focus:ring-gray-200 outline-none"
           />
           {errors.image && (
             <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>
@@ -129,7 +129,7 @@ const AddHeroPhoto = () => {
             className={`px-12 py-5 rounded-xl text-white font-bold text-lg transition-all transform hover:scale-105 ${
               isSubmitting
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-linear-to-r from-[#aba65e] to-purple-200 hover:shadow-2xl"
+                : "bg-linear-to-r from-[#C8102E] to-purple-200 hover:shadow-2xl"
             }`}
           >
             Post Hero Image

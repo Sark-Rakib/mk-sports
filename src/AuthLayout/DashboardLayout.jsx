@@ -14,203 +14,69 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    logOut().then(() => navigate("/")).catch((err) => console.log(err.message));
   };
+
+  const SidebarLink = ({ to, icon, label, tip }) => (
+    <li>
+      <Link to={to} className="flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium tracking-wide text-gray-400 hover:text-white hover:bg-white/5 transition-all is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip={tip}>
+        {icon}
+        <span className="is-drawer-close:hidden">{label}</span>
+      </Link>
+    </li>
+  );
+
   return (
     <div className="drawer lg:drawer-open">
       <title>MK Sports | Dashboard</title>
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        {/* Navbar */}
-        <nav className="navbar bg-[#aba65e] border-b border-[#aba65e] sticky top-0 z-10 w-full">
-          <label
-            htmlFor="my-drawer-4"
-            aria-label="open sidebar"
-            className="btn btn-square btn-ghost hover:bg-[#aba65e] border-none"
-          >
-            {/* Sidebar toggle icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              fill="none"
-              stroke="currentColor"
-              className="my-1.5 inline-block size-4"
-            >
-              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-              <path d="M9 4v16"></path>
-              <path d="M14 10l2 2l-2 2"></path>
+
+      <div className="drawer-content bg-gray-50">
+        <nav className="bg-white border-b border-gray-100 sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-4">
+          <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost border-none hover:bg-gray-50 lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </label>
-          <div className="px-4">MK SPORTS Dashboard</div>
+          <h1 className="text-sm font-semibold tracking-[0.1em] uppercase text-gray-900">Dashboard</h1>
         </nav>
-        {/* Page content here */}
-        <Outlet></Outlet>
+        <div className="p-6 sm:p-8">
+          <Outlet />
+        </div>
       </div>
+
       <div className="drawer-side is-drawer-close:overflow-visible">
-        <label
-          htmlFor="my-drawer-4"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <div className="flex min-h-full flex-col items-start  border-r border-[#aba65e] is-drawer-close:w-20 is-drawer-open:w-64">
-          {/* Sidebar content here */}
-          <ul className="menu w-full grow">
-            {/* List item */}
-            <li>
-              <Link
-                to="/"
-                className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Homepage"
-              >
-                {/* Home icon */}
+        <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
+        <div className="flex min-h-full flex-col bg-[#111] border-r border-white/5 is-drawer-close:w-20 is-drawer-open:w-64">
+          <div className="px-5 py-6 border-b border-white/5">
+            <Link to="/" className="flex items-center gap-3 is-drawer-close:justify-center">
+              <div className="w-9 h-9 bg-[#C8102E] flex items-center justify-center text-white font-bold text-xs tracking-wider">
+                MK
+              </div>
+              <span className="text-white font-semibold text-sm tracking-wider uppercase is-drawer-close:hidden">MK Sports</span>
+            </Link>
+          </div>
 
-                <FaHome />
-                <span className="is-drawer-close:hidden">Homepage</span>
-              </Link>
-            </li>
-
-            {/* our dashboard links */}
-
-            {/* my order */}
-            <li>
-              <Link
-                to="/dashboard/my-orders"
-                className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="My Order"
-              >
-                <FaShoppingCart />
-                <span className="is-drawer-close:hidden">My Order</span>
-              </Link>
-            </li>
-
+          <ul className="menu w-full grow px-3 py-4 space-y-0.5">
+            <SidebarLink to="/" icon={<FaHome />} label="Homepage" tip="Home" />
+            <SidebarLink to="/dashboard/my-orders" icon={<FaShoppingCart />} label="My Orders" tip="Orders" />
             {role === "admin" && (
               <>
-                <li>
-                  <Link
-                    to="/dashboard/admin"
-                    className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="User Management"
-                  >
-                    <MdAdminPanelSettings />
-                    <span className="is-drawer-close:hidden">
-                      User Management
-                    </span>
-                  </Link>
-                </li>
-                {/* customer order */}
-                <li>
-                  <Link
-                    to="/dashboard/customer-orders"
-                    className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Customer Orders"
-                  >
-                    <FaShoppingBag />
-                    <span className="is-drawer-close:hidden">
-                      Customer Orders
-                    </span>
-                  </Link>
-                </li>
-                {/* customer contact */}
-                <li>
-                  <Link
-                    to="/dashboard/customer-contact"
-                    className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Customer Contact"
-                  >
-                    <FaComment />
-                    <span className="is-drawer-close:hidden">
-                      Customer Contact
-                    </span>
-                  </Link>
-                </li>
-                {/* products */}
-                <li>
-                  <Link
-                    to="/dashboard/student"
-                    className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Products"
-                  >
-                    <FaShoppingCart />
-                    <span className="is-drawer-close:hidden">Products</span>
-                  </Link>
-                </li>
-
-                {/* add products */}
-                <li>
-                  <Link
-                    to="/dashboard/add-tuition"
-                    className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Add Product"
-                  >
-                    <FaPlusSquare />
-                    <span className="is-drawer-close:hidden">Add Product</span>
-                  </Link>
-                </li>
-
-                {/* add hero photo */}
-                <li>
-                  <Link
-                    to="/dashboard/add-hero-photo"
-                    className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Add Hero Photo"
-                  >
-                    <FaPlusSquare />
-                    <span className="is-drawer-close:hidden">
-                      Add Hero Photo
-                    </span>
-                  </Link>
-                </li>
+                <li className="px-4 py-2"><span className="text-[10px] font-semibold text-gray-600 uppercase tracking-[0.15em] is-drawer-close:hidden">Admin</span></li>
+                <SidebarLink to="/dashboard/admin" icon={<MdAdminPanelSettings />} label="Users" tip="Users" />
+                <SidebarLink to="/dashboard/customer-orders" icon={<FaShoppingBag />} label="Orders" tip="All Orders" />
+                <SidebarLink to="/dashboard/customer-contact" icon={<FaComment />} label="Contact" tip="Contact" />
+                <SidebarLink to="/dashboard/student" icon={<FaShoppingCart />} label="Products" tip="Products" />
+                <SidebarLink to="/dashboard/add-tuition" icon={<FaPlusSquare />} label="Add Product" tip="Add" />
+                <SidebarLink to="/dashboard/add-hero-photo" icon={<FaPlusSquare />} label="Hero Photos" tip="Photos" />
               </>
             )}
-            {/* payment history */}
-            {/* <li>
-              <Link
-                to="/dashboard/payment"
-                className="btn bg-amber-400 shadow-amber-200 flex items-center mb-1 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Payment History"
-              >
-                <MdPayment />
-                <span className="is-drawer-close:hidden">Payment History</span>
-              </Link>
-            </li> */}
           </ul>
-          {/* user profile */}
-          <div className="w-full p-2">
-            <li>
-              <Link
-                to="/dashboard/profile"
-                className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center justify-start mb-1 gap-2
-    is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="My Profile"
-              >
-                {/* profile icon */}
 
-                <img
-                  src={user?.photoURL}
-                  alt="User"
-                  className="w-8 h-8 rounded-full object-cover"
-                />
-                <span className="is-drawer-close:hidden">My Profile</span>
-              </Link>
-            </li>
-
-            {/* log out button */}
+          <div className="px-3 pb-4 space-y-0.5">
+            <SidebarLink to="/dashboard/profile" icon={<img src={user?.photoURL} alt="User" className="w-7 h-7 rounded-full object-cover ring-1 ring-white/10" />} label="Profile" tip="Profile" />
             <li>
-              <button
-                onClick={handleLogOut}
-                className="btn bg-[#aba65e] shadow-[#aba65e] text-white flex items-center w-full is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Log Out"
-              >
-                {/* logout icon */}
+              <button onClick={handleLogOut} className="flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium tracking-wide text-gray-400 hover:text-[#C8102E] hover:bg-white/5 transition-all w-full is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Logout">
                 <CiLogout />
                 <span className="is-drawer-close:hidden">Logout</span>
               </button>

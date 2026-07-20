@@ -51,7 +51,7 @@ const CustomerReview = () => {
     <section className="max-w-3xl mx-auto px-5 py-20">
       <h2 className="text-3xl font-bold text-center mb-10 flex items-center justify-center gap-2">
         <MdOutlineRateReview /> Customer{" "}
-        <span className="text-[#aba65e]">Review</span>
+        <span className="text-[#C8102E]">Review</span>
       </h2>
 
       <form
@@ -116,7 +116,7 @@ const CustomerReview = () => {
           )}
         </div>
 
-        <button className="w-full bg-[#aba65e] hover:bg-[#8a854d] text-white py-2 rounded-lg font-semibold">
+        <button className="w-full bg-[#C8102E] hover:bg-[#A30D25] text-white py-2 rounded-lg font-semibold">
           Submit Review
         </button>
       </form>

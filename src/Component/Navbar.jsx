@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
-import "./Navbar.css";
 import userAuth from "../Hooks/useAuth";
-import { FaChevronDown } from "react-icons/fa";
 import { CiLogin, CiUser } from "react-icons/ci";
 import navLogo from "../assets/455929671_122105534468469330_3367931376665786303_n-removebg-preview.png";
 
 const Navbar = ({ theme, setTheme }) => {
   const { user } = userAuth();
   const [open, setOpen] = useState(false);
-  const [categoryOpen, setCategoryOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -23,248 +19,221 @@ const Navbar = ({ theme, setTheme }) => {
     setTheme(e.target.checked ? "dark" : "light");
   };
 
-  const menuItems = (
-    <>
-      <NavLink to="/" className="block py-2 px-4 hover:bg-gray-200 rounded">
-        Home
-      </NavLink>
-      <NavLink
-        to="/all-products"
-        className="block py-2 px-4 hover:bg-gray-200 rounded"
-      >
-        All Products
-      </NavLink>
-
-      <li className="list-none">
-        {/* Category button */}
-        <button
-          onClick={() => setCategoryOpen(!categoryOpen)}
-          className="flex items-center gap-2 w-full py-2 px-4 font-medium hover:bg-gray-200 rounded"
-        >
-          Category
-          <FaChevronDown
-            className={`transition ml-auto ${categoryOpen ? "rotate-180" : ""}`}
-          />
-        </button>
-
-        {/* Inline routes (hidden by default) */}
-        {categoryOpen && (
-          <ul className="ml-4 mt-2 space-y-1">
-            {/* <NavLink
-              to="/shirt"
-              className="block py-2 px-4 hover:bg-amber-300 rounded"
-            >
-              Shirt
-            </NavLink> */}
-            <NavLink
-              to="/jersey"
-              className="block py-2 px-4 hover:bg-gray-200 rounded"
-            >
-              Jersey
-            </NavLink>
-
-            {/* <NavLink
-              to="/casual-shirt"
-              className="block py-2 px-4 hover:bg-gray-200 rounded"
-            >
-              Casual Shirt
-            </NavLink> */}
-
-            <NavLink
-              to="/pant"
-              className="block py-2 px-4 hover:bg-gray-200 rounded"
-            >
-              Short Pant
-            </NavLink>
-            <NavLink
-              to="/tracksuit"
-              className="block py-2 px-4 hover:bg-gray-200 rounded"
-            >
-              Tracksuit
-            </NavLink>
-          </ul>
-        )}
-      </li>
-
-      {/* {user && (
-        <>
-          <Link
-            to="/add-tuition"
-            className="block py-2 px-4 btn btn-primary btn-sm mt-2"
-          >
-            Add Tuition
-          </Link>
-          <Link
-            to="/add-tutors"
-            className="block py-2 px-4 btn btn-primary btn-sm mt-2"
-          >
-            Add Tutors
-          </Link>
-        </>
-      )} */}
-    </>
-  );
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/all-products", label: "Shop" },
+    { to: "/jersey", label: "Jersey" },
+    { to: "/pant", label: "Short Pant" },
+    { to: "/tracksuit", label: "Tracksuit" },
+  ];
 
   return (
-    <div
-      className={`navbar sticky top-0 z-50 px-5 sm:px-12 lg:px-20 h-16 flex items-center justify-between transition-colors duration-300
-        ${
-          theme === "dark"
-            ? scrolled
-              ? "bg-black/50 backdrop-blur-md text-white"
-              : "bg-transparent text-white"
-            : scrolled
-              ? "bg-white/50 backdrop-blur-md text-black"
-              : "bg-transparent text-black"
-        }
-      `}
-    >
-      <div className="navbar-start w-11/12 mx-auto flex items-center gap-[40%] sm:gap-[10%]">
-        {/* Mobile Hamburger */}
-        <div className="lg:hidden">
-          <button
-            onClick={() => setOpen(true)}
-            className="btn btn-ghost border-none hover:bg-gray-200"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+          ${
+            scrolled
+              ? theme === "dark"
+                ? "bg-black/95 backdrop-blur-xl text-white shadow-lg shadow-black/20"
+                : "bg-white/95 backdrop-blur-xl text-black shadow-lg shadow-black/5"
+              : theme === "dark"
+                ? "bg-black text-white"
+                : "bg-white text-black"
+          }
+        `}
+      >
+        {/* Marquee Bar */}
+        <div className="overflow-hidden w-full bg-black text-white py-2 border-b border-white/10">
+          <p className="marquee text-[10px] tracking-[0.2em] uppercase font-medium">
+            Free shipping on orders over ৳2000 &mdash; Fuel Your Passion with MK
+            Sports &mdash; Premium Quality Guaranteed
+          </p>
         </div>
 
-        {/* Mobile Slide Menu */}
-        <div
-          className={`fixed inset-0 z-50 transition-all duration-300 ${
-            open ? "visible" : "invisible"
-          }`}
-        >
-          {/* Overlay */}
-          <div
-            onClick={() => setOpen(false)}
-            className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-              open ? "opacity-100" : "opacity-0"
-            }`}
-          ></div>
+        <div className="px-4">
+          <div className="flex items-center justify-between h-15 sm:h-17">
+            {/* Logo */}
+            <Link to="/" className="shrink-0">
+              <img src={navLogo} alt="MK Sports" className="h-12 sm:h-14" />
+            </Link>
 
-          {/* Drawer */}
-          <div
-            className={`absolute left-0 top-0 h-full w-60 shadow-xl transform transition-transform duration-300 ${
-              open ? "translate-x-0" : "-translate-x-full"
-            } ${
-              theme === "dark"
-                ? "bg-gray-900 text-white"
-                : "bg-white text-black"
-            }`}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b">
-              <h2 className="text-xl font-bold">Menu</h2>
-              <button
-                onClick={() => setOpen(false)}
-                className="btn btn-sm btn-ghost hover:bg-gray-200 border-none"
-              >
-                ✕
-              </button>
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `text-[13px] font-medium tracking-[0.08em] uppercase transition-colors duration-300 ${
+                      isActive
+                        ? "text-[#C8102E]"
+                        : theme === "dark"
+                          ? "text-gray-300 hover:text-white"
+                          : "text-gray-600 hover:text-black"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
             </div>
 
-            {/* Menu Items */}
-            <ul
-              // onClick={() => setOpen(false)}
-              className="menu p-5 text-base font-medium space-y-1"
-            >
-              {menuItems}
-            </ul>
+            {/* Right */}
+            <div className="flex items-center gap-3">
+              <label className="swap swap-rotate cursor-pointer p-2">
+                <input
+                  type="checkbox"
+                  onChange={handleThemeToggle}
+                  checked={theme === "dark"}
+                />
+                <svg
+                  className="swap-on fill-current w-[18px] h-[18px] text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5.64 17l-.71.71a.996.996 0 101.41 1.41l.71-.71A.996.996 0 105.64 17zM12 4a1 1 0 100 2 1 1 0 000-2zm7.05 1.64a.996.996 0 00-1.41 0l-.71.71a.996.996 0 101.41 1.41l.71-.71a.996.996 0 000-1.41zM4 12a1 1 0 100 2 1 1 0 000-2zm8 8a1 1 0 100-2 1 1 0 000 2zm6.36-2.64a.996.996 0 10-1.41-1.41l-.71.71a.996.996 0 101.41 1.41l.71-.71zM20 12a1 1 0 100 2 1 1 0 000-2zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+                </svg>
+                <svg
+                  className="swap-off fill-current w-[18px] h-[18px] text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21.64 13.65A9 9 0 1112 3a7 7 0 009.64 10.65z" />
+                </svg>
+              </label>
+
+              {user ? (
+                <Link
+                  to="/dashboard"
+                  className={`p-2 transition-colors ${
+                    theme === "dark"
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-500 hover:text-black"
+                  }`}
+                >
+                  <CiUser className="text-xl" />
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="hidden sm:flex items-center gap-1.5 px-5 py-2 bg-black text-white text-[11px] font-semibold tracking-[0.1em] uppercase hover:bg-[#C8102E] transition-colors duration-300"
+                >
+                  <CiLogin className="text-sm" />
+                  Sign In
+                </Link>
+              )}
+
+              {/* Mobile Hamburger */}
+              <button
+                onClick={() => setOpen(true)}
+                className={`lg:hidden p-2 transition-colors ${
+                  theme === "dark"
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-500 hover:text-black"
+                }`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
+      </nav>
 
-        {/* <img className="h-12 ml-3" alt="E-Tuition BD Logo" src={Logo} /> */}
-
-        <img src={navLogo} alt="" className="h-15 -ml-1" />
-      </div>
-
-      {/* Desktop Menu  */}
-      <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1 gap-8">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/all-products">All Products</NavLink>
-          {/* <NavLink to="/shirt">Shirt</NavLink> */}
-          <NavLink to="/jersey">Jersey</NavLink>
-          {/* <NavLink to="/casual-shirt">Casual Shirt</NavLink> */}
-          <NavLink to="/pant">Short Pant</NavLink>
-          <NavLink to="/tracksuit">Tracksuit</NavLink>
-        </ul>
-      </div>
-
-      <div className="navbar-end">
-        <div className="flex items-center gap-3 mr-2">
-          <label className="swap swap-rotate">
-            <input
-              type="checkbox"
-              onChange={handleThemeToggle}
-              checked={theme === "dark"}
-            />
-
-            {/* sun icon */}
-            <svg
-              className="swap-on fill-current w-6 h-6 text-yellow-200"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
+      {/* Mobile Menu */}
+      <div
+        className={`fixed inset-0 z-[60] lg:hidden transition-all duration-300 ${open ? "visible" : "invisible"}`}
+      >
+        <div
+          onClick={() => setOpen(false)}
+          className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+        />
+        <div
+          className={`absolute right-0 top-0 h-full w-full sm:w-96 bg-white shadow-2xl transform transition-transform duration-500 ease-out ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+            <h2 className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-900">
+              Menu
+            </h2>
+            <button
+              onClick={() => setOpen(false)}
+              className="p-2 text-gray-400 hover:text-black transition-colors"
             >
-              <path d="M5.64 17l-.71.71a.996.996 0 101.41 1.41l.71-.71A.996.996 0 105.64 17zM12 4a1 1 0 100 2 1 1 0 000-2zm7.05 1.64a.996.996 0 00-1.41 0l-.71.71a.996.996 0 101.41 1.41l.71-.71a.996.996 0 000-1.41zM4 12a1 1 0 100 2 1 1 0 000-2zm8 8a1 1 0 100-2 1 1 0 000 2zm6.36-2.64a.996.996 0 10-1.41-1.41l-.71.71a.996.996 0 101.41 1.41l.71-.71zM20 12a1 1 0 100 2 1 1 0 000-2zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-            </svg>
-
-            {/* moon icon */}
-            <svg
-              className="swap-off fill-current w-6 h-6 text-grya-200"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path d="M21.64 13.65A9 9 0 1112 3a7 7 0 009.64 10.65z" />
-            </svg>
-          </label>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="px-6 py-6">
+            <ul className="space-y-1">
+              {navLinks.map((link, i) => (
+                <li key={link.to}>
+                  <NavLink
+                    to={link.to}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `block py-3 text-[13px] font-medium tracking-[0.08em] uppercase border-b border-gray-50 transition-colors ${
+                        isActive
+                          ? "text-[#C8102E]"
+                          : "text-gray-800 hover:text-[#C8102E]"
+                      }`
+                    }
+                  >
+                    <span className="text-gray-300 text-xs mr-3">0{i + 1}</span>
+                    {link.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            {!user && (
+              <Link
+                to="/login"
+                onClick={() => setOpen(false)}
+                className="mt-8 block w-full py-3.5 bg-black text-white text-center text-[11px] font-semibold tracking-[0.1em] uppercase hover:bg-[#C8102E] transition-colors"
+              >
+                Sign In
+              </Link>
+            )}
+          </div>
         </div>
-        <div className="hidden lg:flex gap-2">
-          {/* {user && (
-            <Link className="btn btn-primary" to="/add-tuition">
-              Add Tuition
-            </Link>
-          )} */}
-          {/* {user && (
-            <Link className="btn btn-primary" to="/add-tutors">
-              Add Tutors
-            </Link>
-          )} */}
-        </div>
-
-        {/* Dashboard / Login */}
-        {user ? (
-          <Link
-            className="text-xl shadow-none ml-2 hover:bg-gray-200 rounded p-1"
-            to="/dashboard"
-          >
-            <CiUser />
-          </Link>
-        ) : (
-          <Link
-            to="/login"
-            className="text-xl shadow-none ml-2 mb-1 hover:bg-gray-200 rounded p-1"
-          >
-            <CiLogin />
-          </Link>
-        )}
       </div>
-    </div>
+
+      <style>{`
+        .marquee {
+          white-space: nowrap;
+          animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+      `}</style>
+    </>
   );
 };
 

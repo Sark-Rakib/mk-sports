@@ -45,7 +45,7 @@ const ContactUs = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-4xl font-bold text-gray-800 mb-4">
-            Get in Touch <span className="text-[#aba65e]">With Us</span>
+            Get in Touch <span className="text-[#C8102E]">With Us</span>
           </h2>
           <p className="text-l max-w-2xl mx-auto">
             Have questions? Need help? We're here 24 hour for you.

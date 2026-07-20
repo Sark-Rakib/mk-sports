@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Marco from "./Marco";
 import NeedHelpFloating from "./NeedHelpFloating";
 
 const Root = () => {
@@ -16,14 +15,14 @@ const Root = () => {
   }, [theme]);
 
   return (
-    <>
-      <Marco></Marco>
+    <div className={theme === "dark" ? "bg-black text-white" : "bg-white text-gray-900"}>
       <Navbar theme={theme} setTheme={setTheme} />
-      <Outlet />
-      {/* <!-- Floating Chat Buttons with Tailwind CSS --> */}
-      <NeedHelpFloating></NeedHelpFloating>
+      <main className="pt-[79px] sm:pt-[87px]">
+        <Outlet />
+      </main>
+      <NeedHelpFloating />
       <Footer />
-    </>
+    </div>
   );
 };
 

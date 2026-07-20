@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
-import { motion } from "framer-motion";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 import useAxiosSecure from "../Hooks/useAxios";
 import SkeletonLoader from "./SkeletonLoader";
 
@@ -15,14 +14,10 @@ const Products = () => {
       try {
         setLoading(true);
         const res = await axiosSecure.get("/tuitions");
-
         const data = Array.isArray(res.data)
           ? res.data
           : res.data?.tuitions || [];
-
-        // only approved products
         const approved = data.filter((item) => item.status === "Approved");
-
         setProducts(approved.slice(0, 20));
       } catch (error) {
         console.error("Product fetch error:", error);
@@ -30,117 +25,103 @@ const Products = () => {
         setLoading(false);
       }
     };
-
-    if (axiosSecure) {
-      fetchProducts();
-    }
+    if (axiosSecure) fetchProducts();
   }, [axiosSecure]);
 
   return (
-    <section className="py-10 border-b border-t border-[#aba65e] overflow-hidden flex flex-col">
-      <div className="w-11/12 mx-auto px-2 md:px-6">
-        {/* Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Our <span className="text-[#aba65e]">Products</span>
-          </h2>
-          {/* <p className="text-gray-600 mt-1">Choose your favorite clothing</p> */}
+    <section className="py-10">
+      <div className="px-7">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14">
+          <div>
+            <p className="text-[#C8102E] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">
+              Featured
+            </p>
+            <h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Our Products
+            </h2>
+          </div>
+          <Link
+            to="/all-products"
+            className="mt-4 sm:mt-0 text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 hover:text-[#C8102E] transition-colors flex items-center gap-2 group"
+          >
+            View All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
         </div>
 
         {/* Loading */}
         {loading && (
-          <p className="w-11/12 mx-auto text-center py-20 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {Array(8)
               .fill(0)
               .map((_, i) => (
                 <SkeletonLoader key={i} />
               ))}
-            {/* <SkeletonLoader></SkeletonLoader> */}
-          </p>
+          </div>
         )}
 
         {/* Products Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7">
-          {products.map((item) => (
-            <Link key={item._id} to={`/products-details/${item._id}`}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className="transition-all overflow-hidden flex flex-col h-full"
-              >
-                {/* Image */}
-                <div className="relative h-full">
-                  <img
-                    src={
-                      item.images[0] ||
-                      "https://i.ibb.co/4p0jH0Z/default-avatar.jpg"
-                    }
-                    alt={item.name}
-                    className="w-full h-full hover:scale-105 transition-transform duration-300"
-                  />
-
-                  {/* Status */}
-                  <span className="absolute top-3 right-3 bg-[#aba65e] text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    {item.ability}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col flex-1 mt-2">
-                  {/* Top content */}
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-sm md:text-base line-clamp-2">
+        {!loading && (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {products.map((item) => (
+              <Link key={item._id} to={`/products-details/${item._id}`}>
+                <motion.div whileHover={{ y: -2 }} className="group">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+                    <img
+                      src={
+                        item.images[0] ||
+                        "https://i.ibb.co/4p0jH0Z/default-avatar.jpg"
+                      }
+                      alt={item.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute top-0 left-0 bg-black text-white text-[10px] font-semibold tracking-[0.08em] uppercase px-3 py-1.5">
+                      {item.ability}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-[13px] font-medium text-gray-900 line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
                       {item.name}
                     </h3>
-
-                    {/* category */}
-
-                    {/* <div className="flex flex-wrap justify-between text-sm">
-                    <h1 className="text-black">Category :</h1>
-                    <h2 className=" text-gray-800">{item.category}</h2>
-                  </div> */}
-
-                    {/* Price */}
-                    <div className="flex flex-wrap items-center justify-between mt-1">
+                    <div className="flex items-center gap-2">
                       {item.discountPrice ? (
                         <>
-                          <span className="text-sm">
-                            Price : ৳{item.discountPrice}
+                          <span className="text-sm font-bold text-gray-900">
+                            {item.discountPrice} BDT
                           </span>
-                          <span className="text-red-400 line-through text-sm">
-                            ৳{item.price}
+                          <span className="text-xs text-gray-400 line-through">
+                            {item.price} BDT
                           </span>
                         </>
                       ) : (
-                        <span className="text-sm">Price : ৳{item.price}</span>
+                        <span className="text-sm font-bold text-gray-900">
+                          {item.price} BDT
+                        </span>
                       )}
                     </div>
-
-                    {/* Description */}
-                    <p className="text-sm line-clamp-2">
-                      {item.description || "Premium quality sweet product"}
-                    </p>
                   </div>
-
-                  {/* Button – always bottom */}
-                  {/* <Link to={`/products-details/${item._id}`} className="mt-2">
-                    <button className="w-full py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-400 transition-all">
-                      View Details
-                    </button>
-                  </Link> */}
-                </div>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
-
-        {/* See All */}
-        <div className="flex justify-center mt-10">
-          <Link to="/all-products">
-            <button className="flex items-center gap-2 px-6 py-3 rounded bg-[#aba65e] text-white font-semibold hover:bg-gray-400 transition-all">
-              See All Products <FaArrowRight />
-            </button>
-          </Link>
-        </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

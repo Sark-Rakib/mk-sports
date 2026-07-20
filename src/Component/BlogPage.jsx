@@ -32,7 +32,7 @@ const BlogPage = () => {
   return (
     <div className="max-w-6xl mx-auto p-6 lg:p-12">
       <title>MK Sports Blog</title>
-      <h1 className="text-4xl font-bold text-center mb-12 text-[#aba65e]">
+      <h1 className="text-4xl font-bold text-center mb-12 text-[#C8102E]">
         MK Sports Blog
       </h1>
 
@@ -50,7 +50,7 @@ const BlogPage = () => {
               <p className="text-gray-700 mb-6">{blog.summary}</p>
               <a
                 href={blog.link}
-                className="text-white bg-[#aba65e] px-4 py-2 rounded hover:bg-[#8a854d] transition-colors duration-300"
+                className="text-white bg-[#C8102E] px-4 py-2 rounded hover:bg-[#A30D25] transition-colors duration-300"
               >
                 Read More
               </a>

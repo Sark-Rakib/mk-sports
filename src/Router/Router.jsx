@@ -31,6 +31,8 @@ import BlogPage from "../Component/BlogPage";
 import Tracksuit from "../Pages/Tracksuit";
 import Jersey from "../Pages/Jersey";
 import AddHeroPhoto from "../Pages/Dashboard/AddHeroPhoto";
+import OrderForm from "../Pages/OrderForm";
+import OrderConfirmation from "../Pages/OrderConfirmation";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: "/products-details/:id",
         Component: ProductDetails,
+      },
+      {
+        path: "/order/:id",
+        Component: OrderForm,
+      },
+      {
+        path: "/order-confirmation",
+        Component: OrderConfirmation,
       },
 
       {
