@@ -53,7 +53,7 @@ const PendingTuitions = () => {
     <div className="p-8">
       <title>MK Sports | User Management</title>
 
-      <h1 className="text-3xl font-bold mb-6">
+      <h1 className="text-3xl font-bold mb-6 text-black">
         User Management (<span className="text-[#C8102E]">{users.length}</span>)
       </h1>
 
@@ -74,7 +74,7 @@ const PendingTuitions = () => {
 
             <tbody>
               {users.map((t, index) => (
-                <tr key={t._id} className="text-black">
+                <tr key={t._id} className="text-gray-400">
                   <td>{index + 1}</td>
                   <td>{t.displayName}</td>
                   <td>{t.email}</td>

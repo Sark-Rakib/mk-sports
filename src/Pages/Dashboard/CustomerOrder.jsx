@@ -61,7 +61,7 @@ const CustomerOrder = () => {
   return (
     <div className="max-w-6xl mx-auto px-4">
       <title>MK Sports | Customer Order</title>
-      <h1 className="font-bold text-xl text-center mb-5 py-5">
+      <h1 className="font-bold text-xl text-center mb-5 py-5 text-black">
         Customer Orders : (
         <span className="text-[#C8102E]">{orders.length}</span>)
       </h1>

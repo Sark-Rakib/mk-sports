@@ -72,7 +72,11 @@ const OrderForm = () => {
 
       const res = await axiosSecure.post("/orders", orderData);
 
-      const orderId = res.data.insertedId || res.data._id || res.data.acknowledged && res.data.insertedId || "";
+      const orderId =
+        res.data.insertedId ||
+        res.data._id ||
+        (res.data.acknowledged && res.data.insertedId) ||
+        "";
 
       await Swal.fire({
         title: "Order Placed!",
@@ -114,7 +118,7 @@ const OrderForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <title>MK Sports | Place Order</title>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-16">
@@ -134,7 +138,7 @@ const OrderForm = () => {
               Checkout
             </p>
             <h1
-              className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-10"
+              className="text-3xl sm:text-4xl font-bold leading-tight mb-10"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Shipping Details
@@ -173,7 +177,7 @@ const OrderForm = () => {
                       message: "Invalid email address",
                     },
                   })}
-                  className="w-full px-4 py-3.5 border border-gray-200 text-sm focus:outline-none focus:border-black transition-colors bg-gray-50"
+                  className="w-full px-4 py-3.5 border border-gray-200 text-sm focus:outline-none focus:border-black transition-colors"
                   placeholder="you@example.com"
                   disabled={!!user}
                 />
@@ -192,7 +196,7 @@ const OrderForm = () => {
                 <select
                   {...register("size", { required: "Size is required" })}
                   defaultValue={initialSize}
-                  className="w-full px-4 py-3.5 border border-gray-200 text-sm focus:outline-none focus:border-black transition-colors bg-white"
+                  className="w-full px-4 py-3.5 border border-gray-200 text-sm focus:outline-none focus:border-black transition-colors"
                 >
                   <option value="">Select Size</option>
                   <option value="S">S</option>
@@ -305,7 +309,7 @@ const OrderForm = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#C8102E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-black border text-white text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#C8102E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? "Placing Order..." : "Place Order"}
               </button>
@@ -351,7 +355,7 @@ const OrderForm = () => {
                   </p>
                   {product.discountPrice && (
                     <p className="text-xs text-gray-400 line-through">
-                      Discount {product.price} BDT
+                      {product.price} BDT
                     </p>
                   )}
                 </div>

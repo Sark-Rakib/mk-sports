@@ -60,7 +60,7 @@ const MyOrders = () => {
   return (
     <div className="p-6">
       <title>MK Sports | My Order</title>
-      <h1 className="text-2xl font-bold  text-center mb-6">
+      <h1 className="text-2xl font-bold  text-center mb-6 text-black">
         My Orders (<span className="text-[#C8102E]">{orders.length}</span>)
       </h1>
 

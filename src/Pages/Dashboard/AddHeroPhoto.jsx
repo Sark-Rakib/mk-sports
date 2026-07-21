@@ -95,10 +95,10 @@ const AddHeroPhoto = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 lg:p-10">
+    <div className="max-w-7xl mx-auto">
       <title>MK Sports | Add Hero</title>
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold text-black">
           Hero <span className="text-[#C8102E]">Photos</span>
         </h1>
       </div>
@@ -106,10 +106,10 @@ const AddHeroPhoto = () => {
       {/* Upload Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-gray-50 rounded-3xl text-black shadow-xl p-8 border border-gray-200 space-y-7 mb-10"
+        className="bg-gray-50 rounded text-black shadow-xl p-8 border border-gray-200 space-y-7 mb-10"
       >
         <div>
-          <label className="block text-lg font-semibold text-gray-700 mb-2">
+          <label className="block text-lg font-semibold mb-2">
             Hero Image <span className="text-red-500">*</span>
           </label>
           <input
@@ -129,7 +129,7 @@ const AddHeroPhoto = () => {
             className={`px-12 py-5 rounded-xl text-white font-bold text-lg transition-all transform hover:scale-105 ${
               isSubmitting
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-linear-to-r from-[#C8102E] to-purple-200 hover:shadow-2xl"
+                : "bg-linear-to-r from-[#1f1b1c] to-black hover:shadow-2xl"
             }`}
           >
             Post Hero Image

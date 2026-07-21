@@ -119,9 +119,9 @@ const AddProductsList = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="p-8">
+    <div className="p-2">
       <title>MK Sports | Product</title>
-      <h1 className="text-3xl text-center font-bold mb-6">
+      <h1 className="text-3xl text-center font-bold mb-6 text-black">
         All Products (<span className="text-[#C8102E]">{tuitions.length}</span>)
       </h1>
       {tuitions.length === 0 ? (
@@ -129,7 +129,7 @@ const AddProductsList = () => {
       ) : (
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="table table-zebra w-full">
-            <thead className="bg-gray-100 text-[#c5ba1a]">
+            <thead className="bg-gray-100 text-black">
               <tr>
                 <th>SL</th>
                 <th>Name</th>
@@ -144,7 +144,7 @@ const AddProductsList = () => {
             </thead>
             <tbody>
               {tuitions.map((t, index) => (
-                <tr key={t._id} className="text-[#afa94b]">
+                <tr key={t._id} className="text-gray-400">
                   <td>{index + 1}</td>
                   <td>{t.name}</td>
                   <td>{t.category}</td>
