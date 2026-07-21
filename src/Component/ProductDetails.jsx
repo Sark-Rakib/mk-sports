@@ -84,7 +84,7 @@ const ProductDetails = () => {
   return (
     <div className="min-h-screen">
       <title>MK Sports | Details</title>
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back */}
         <Link
           to="/all-products"
