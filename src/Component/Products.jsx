@@ -30,7 +30,7 @@ const Products = () => {
 
   return (
     <section className="py-10">
-      <div className="px-7">
+      <div className="px-4">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14">
           <div>
@@ -38,7 +38,7 @@ const Products = () => {
               Featured
             </p>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Our Products
@@ -97,13 +97,13 @@ const Products = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-[13px] font-medium text-gray-900 line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
+                    <h3 className="text-[13px] font-medium line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
                       {item.name}
                     </h3>
                     <div className="flex items-center gap-2">
                       {item.discountPrice ? (
                         <>
-                          <span className="text-sm font-bold text-gray-900">
+                          <span className="text-sm font-bold">
                             {item.discountPrice} BDT
                           </span>
                           <span className="text-xs text-gray-400 line-through">
@@ -111,7 +111,7 @@ const Products = () => {
                           </span>
                         </>
                       ) : (
-                        <span className="text-sm font-bold text-gray-900">
+                        <span className="text-sm font-bold">
                           {item.price} BDT
                         </span>
                       )}

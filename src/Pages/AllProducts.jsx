@@ -46,7 +46,7 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="py-14 px-7">
+    <div className="py-14 px-4">
       <title>MK Sports | All Products</title>
 
       {/* Header */}
@@ -55,7 +55,7 @@ const AllProducts = () => {
           Collection
         </p>
         <h1
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           All Products

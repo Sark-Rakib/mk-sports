@@ -41,13 +41,13 @@ const Pant = () => {
   return (
     <section className="py-14">
       <title>MK Sports | Short Pants</title>
-      <div className="px-7">
+      <div className="px-4">
         <div className="mb-14">
           <p className="text-[#C8102E] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">
             Collection
           </p>
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             All Short Pants
@@ -72,13 +72,13 @@ const Pant = () => {
                     {item.ability}
                   </div>
                 </div>
-                <h3 className="text-[13px] font-medium text-gray-900 line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
+                <h3 className="text-[13px] font-medium line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
                   {item.name}
                 </h3>
                 <div className="flex items-center gap-2">
                   {item.discountPrice ? (
                     <>
-                      <span className="text-sm font-bold text-gray-900">
+                      <span className="text-sm font-bold">
                         {item.discountPrice} BDT
                       </span>
                       <span className="text-xs text-gray-400 line-through">
@@ -86,9 +86,7 @@ const Pant = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="text-sm font-bold text-gray-900">
-                      {item.price} BDT
-                    </span>
+                    <span className="text-sm font-bold">{item.price} BDT</span>
                   )}
                 </div>
               </motion.div>

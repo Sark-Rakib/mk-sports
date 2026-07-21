@@ -50,11 +50,11 @@ const Navbar = ({ theme, setTheme }) => {
           </p>
         </div>
 
-        <div className="px-4">
-          <div className="flex items-center justify-between h-15 sm:h-17">
+        <div className="px-1">
+          <div className="flex items-center justify-between h-16 sm:h-18">
             {/* Logo */}
             <Link to="/" className="shrink-0">
-              <img src={navLogo} alt="MK Sports" className="h-12 sm:h-14" />
+              <img src={navLogo} alt="MK Sports" className="h-14 sm:h-16" />
             </Link>
 
             {/* Desktop Nav */}
@@ -154,7 +154,7 @@ const Navbar = ({ theme, setTheme }) => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-[60] lg:hidden transition-all duration-300 ${open ? "visible" : "invisible"}`}
+        className={`fixed inset-0 z-60 lg:hidden transition-all duration-300 ${open ? "visible" : "invisible"}`}
       >
         <div
           onClick={() => setOpen(false)}

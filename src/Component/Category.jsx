@@ -35,7 +35,7 @@ const Category = () => {
 
   return (
     <section className="py-14 bg-white">
-      <div className="px-7">
+      <div className="px-4">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14">
           <div>
             <p className="text-[#C8102E] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">

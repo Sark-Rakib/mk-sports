@@ -28,7 +28,7 @@ const Jersey = () => {
 
   if (loading) {
     return (
-      <div className="px-7 py-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="px-4 py-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
         {Array(8)
           .fill(0)
           .map((_, i) => (
@@ -47,7 +47,7 @@ const Jersey = () => {
             Collection
           </p>
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             All Jerseys
@@ -72,13 +72,13 @@ const Jersey = () => {
                     {item.ability}
                   </div>
                 </div>
-                <h3 className="text-[13px] font-medium text-gray-900 line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
+                <h3 className="text-[13px] font-medium line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
                   {item.name}
                 </h3>
                 <div className="flex items-center gap-2">
                   {item.discountPrice ? (
                     <>
-                      <span className="text-sm font-bold text-gray-900">
+                      <span className="text-sm font-bold">
                         {item.discountPrice} BDT
                       </span>
                       <span className="text-xs text-gray-400 line-through">
@@ -86,9 +86,7 @@ const Jersey = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="text-sm font-bold text-gray-900">
-                      {item.price} BDT
-                    </span>
+                    <span className="text-sm font-bold">{item.price} BDT</span>
                   )}
                 </div>
               </motion.div>

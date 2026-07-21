@@ -17,21 +17,19 @@ const ProductCard = ({ tuition }) => {
         </div>
       </div>
       <div>
-        <h2 className="text-[13px] font-medium text-gray-900 line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
+        <h2 className="text-[13px] font-medium line-clamp-1 mb-1.5 group-hover:text-[#C8102E] transition-colors">
           {name}
         </h2>
         <div className="flex items-center gap-2">
           {discountPrice ? (
             <>
-              <span className="text-sm font-bold text-gray-900">
-                {discountPrice} BDT
-              </span>
+              <span className="text-sm font-bold">{discountPrice} BDT</span>
               <span className="text-xs text-gray-400 line-through">
                 {price} BDT
               </span>
             </>
           ) : (
-            <span className="text-sm font-bold text-gray-900">{price} BDT</span>
+            <span className="text-sm font-bold">{price} BDT</span>
           )}
         </div>
       </div>
