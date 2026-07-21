@@ -106,7 +106,7 @@ const ProductDetails = () => {
               {tuition.ability}
             </p>
             <h1
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {tuition.name}
@@ -123,14 +123,12 @@ const ProductDetails = () => {
                   <span className="text-gray-400 line-through text-lg">
                     {tuition.price} BDT
                   </span>
-                  <span className="text-3xl font-bold text-gray-900">
+                  <span className="text-3xl font-bold">
                     {tuition.discountPrice} BDT
                   </span>
                 </>
               ) : (
-                <span className="text-3xl font-bold text-gray-900">
-                  {tuition.price} BDT
-                </span>
+                <span className="text-3xl font-bold">{tuition.price} BDT</span>
               )}
             </div>
 
@@ -166,27 +164,59 @@ const ProductDetails = () => {
               <select
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
-                className="w-full sm:w-64 px-4 py-3 border border-gray-200 text-sm bg-white focus:outline-none focus:border-black transition-colors"
+                className="w-full sm:w-64 px-4 py-3 border border-gray-200 text-sm focus:outline-none transition-colors"
               >
-                <option value="">Select Size</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-                <option value="3XL">3XL</option>
-                <option value="4XL">4XL</option>
+                <option className="text-black" value="">
+                  Select Size
+                </option>
+                <option className="text-black" value="S">
+                  S
+                </option>
+                <option className="text-black" value="M">
+                  M
+                </option>
+                <option className="text-black" value="L">
+                  L
+                </option>
+                <option className="text-black" value="XL">
+                  XL
+                </option>
+                <option className="text-black" value="XXL">
+                  XXL
+                </option>
+                <option className="text-black" value="3XL">
+                  3XL
+                </option>
+                <option className="text-black" value="4XL">
+                  4XL
+                </option>
                 <option disabled>For Kids</option>
-                <option value="16">16</option>
-                <option value="18">18</option>
-                <option value="20">20</option>
-                <option value="22">22</option>
-                <option value="24">24</option>
-                <option value="26">26</option>
-                <option value="28">28</option>
+                <option className="text-black" value="16">
+                  16
+                </option>
+                <option className="text-black" value="18">
+                  18
+                </option>
+                <option className="text-black" value="20">
+                  20
+                </option>
+                <option className="text-black" value="22">
+                  22
+                </option>
+                <option className="text-black" value="24">
+                  24
+                </option>
+                <option className="text-black" value="26">
+                  26
+                </option>
+                <option className="text-black" value="28">
+                  28
+                </option>
               </select>
               {sizeError && (
-                <p className="text-[#C8102E] text-xs mt-2">Please select a size</p>
+                <p className="text-[#C8102E] text-xs mt-2">
+                  Please select a size
+                </p>
               )}
             </div>
 
@@ -195,9 +225,7 @@ const ProductDetails = () => {
               <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mr-3">
                 Total
               </span>
-              <span className="text-2xl font-bold text-gray-900">
-                {totalPrice} BDT
-              </span>
+              <span className="text-2xl font-bold">{totalPrice} BDT</span>
             </div>
 
             {/* Admin Edit */}
@@ -223,7 +251,7 @@ const ProductDetails = () => {
                     state: { product: tuition, quantity, size },
                   });
                 }}
-                className="flex-1 py-4 px-8 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#C8102E] transition-colors duration-300"
+                className="flex-1 py-4 px-8 border bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#C8102E] transition-colors duration-300"
               >
                 Order Now
               </button>
@@ -231,7 +259,7 @@ const ProductDetails = () => {
                 href={`https://wa.me/8801792229936?text=${encodeURIComponent(`Hello! I want to order:\nProduct: ${tuition.name}\nQuantity: ${quantity}\nSize: ${size}\nTotal: \u09F3${totalPrice}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-4 px-8 border border-gray-200 text-gray-700 text-[11px] font-semibold tracking-[0.15em] uppercase text-center hover:border-black hover:text-black transition-colors duration-300"
+                className="flex-1 py-4 px-8 border border-gray-200 text-gray-700 text-[11px] font-semibold tracking-[0.15em] uppercase text-center hover:border-green-400 transition-colors duration-300"
               >
                 WhatsApp
               </a>
@@ -268,7 +296,7 @@ const ProductDetails = () => {
         ].map((table) => (
           <div key={table.title}>
             <h3
-              className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-900 mb-4"
+              className="text-sm font-semibold tracking-[0.2em] uppercase mb-4"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {table.title}
